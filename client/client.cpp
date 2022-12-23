@@ -69,7 +69,7 @@ Client::Client(QWidget *parent)
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     hostCombo->setEditable(true);
-    // find out name of this machine
+    // Find out name of this machine
     QString name = QHostInfo::localHostName();
     if (!name.isEmpty()) {
         hostCombo->addItem(name);
@@ -166,7 +166,7 @@ Client::Client(QWidget *parent)
     mainLayout->addWidget(labelImage, 4,0,2,3);
 
     setWindowTitle(QGuiApplication::applicationDisplayName());
-    portLineEdit->setFocus(); //Установка фокуса на окно ввода порта
+    portLineEdit->setFocus(); //Устанавливает фокус на окне ввода порта
 
     QNetworkConfigurationManager manager;
     if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired) {
@@ -248,12 +248,8 @@ void Client::slotSendToServer()
     out.device()->seek(0);
     out<<quint64(block.size()- sizeof(quint64));
 
-//    if(block.isEmpty())
-//        portLineEdit->setText(" 0 BYTE IN BLOCK ");
-
     tcpSocket->write(block);
     statusLabel->setText("Data send!");
-    //clientConnection->disconnectFromHost(); //Отключить?
 
 }
 
@@ -314,7 +310,7 @@ void Client::slotConnected()
 
 void Client::selectImageOnButton()
 {
-    QString filename = QFileDialog::getOpenFileName(this, "Выберите изображение для отправки", QDir::currentPath());
+    QString filename = QFileDialog::getOpenFileName(this, "Select Image for send", QDir::currentPath());
     if(!filename.isEmpty())
     {
     labelImage->setPixmap(filename);
